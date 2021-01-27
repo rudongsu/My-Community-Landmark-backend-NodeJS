@@ -40,3 +40,17 @@ export const getNoteByName = async (req, res) => {
     }
 
 }
+
+// delete a post
+export const deleteNoteById = async (req, res) => {
+    const { id } = req.params;
+    const deleteNote = new NoteMessage(req.body);
+
+    try {
+        await NoteMessage.findByIdAndDelete(id);
+        res.status(200).json(deleteNote);
+
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
